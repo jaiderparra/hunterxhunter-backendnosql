@@ -10,23 +10,22 @@ import { swaggerOptions } from './openapi.js';
 dotenv.config();
 const app = express();
 
-// ✅ CORS configurado explícitamente
+// ✅ CORS explícito (antes de todo)
 app.use(cors({
-  origin: "*", // puedes cambiarlo a tu dominio de frontend si deseas más seguridad
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"]
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
 }));
 
 app.use(express.json());
 
-// 🔌 Conexión a Mongo
+// ✅ Conexión a Mongo
 await connectDB();
 
-// 📘 Swagger
 const specs = swaggerJsdoc(swaggerOptions);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-// 🧩 Rutas
+// ✅ Rutas
 app.use('/api/personajes', caballerosRoutes);
 
 const PORT = process.env.PORT || 10001;
