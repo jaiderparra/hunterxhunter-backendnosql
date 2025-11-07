@@ -1,5 +1,5 @@
-import express from 'express';
-import Personaje from '../models/Personaje.js';
+const express = require('express');
+const Personaje = require('../models/Personaje');
 const router = express.Router();
 
 /**
@@ -71,12 +71,14 @@ router.post('/', async (req, res) => {
  *   get:
  *     summary: Obtener personaje por id (NoSQL)
  */
-router.get('/:id', async (req,res)=>{
-  try{
+router.get('/:id', async (req, res) => {
+  try {
     const p = await Personaje.findById(req.params.id);
-    if(!p) return res.status(404).json({message: 'No encontrado'});
+    if (!p) return res.status(404).json({ message: 'No encontrado' });
     res.json(p);
-  }catch(e){ res.status(400).json({error:e.message})}
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
 /**
@@ -85,11 +87,13 @@ router.get('/:id', async (req,res)=>{
  *   put:
  *     summary: Actualizar personaje (NoSQL)
  */
-router.put('/:id', async (req,res)=>{
-  try{
-    const updated = await Personaje.findByIdAndUpdate(req.params.id, req.body, {new:true});
+router.put('/:id', async (req, res) => {
+  try {
+    const updated = await Personaje.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updated);
-  }catch(e){ res.status(400).json({error:e.message})}
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
 /**
@@ -98,11 +102,13 @@ router.put('/:id', async (req,res)=>{
  *   delete:
  *     summary: Eliminar personaje (NoSQL)
  */
-router.delete('/:id', async (req,res)=>{
-  try{
+router.delete('/:id', async (req, res) => {
+  try {
     await Personaje.findByIdAndDelete(req.params.id);
-    res.json({deleted:true});
-  }catch(e){ res.status(400).json({error:e.message})}
+    res.json({ deleted: true });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
-export default router;
+module.exports = router;
