@@ -18,5 +18,5 @@ export const swaggerOptions = {
     ],
   },
  
-  apis: [path.resolve(__dirname, 'routes/*.js')],
+  apis: [path.resolve(__dirname, './routes/*.js')],
 };
