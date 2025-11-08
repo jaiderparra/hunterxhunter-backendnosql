@@ -22,7 +22,7 @@ const specs = swaggerJsdoc(swaggerOptions);
 
 console.log('📘 Swagger rutas detectadas:', Object.keys(specs.paths || {}));
 
-app.use('docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 //  Rutas principales
 app.use('/api/personajes', cazadoresRoutes);
